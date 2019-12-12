@@ -296,4 +296,3 @@ Benchmarks 	  |                                         CPI	|     L1D_miss_rate 
 16.specmcf_L1D(64,2)_L1I(32,2)_L2(2,8)_CL(256)	|1.118754	|0.000946	|0.008173	|0.042457
 
 
-* **458.sjeng** [(results)](./results/Results_sjeng.txt)
