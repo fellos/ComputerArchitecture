@@ -109,7 +109,7 @@ _Valasiadou Panagiota_
 ### **GRAPHS:**  
   
 
- ![**1.Execution time (sim_seconds)**] (graphs/sim_seconds.jpg)
+ ![**1.Execution time (sim_seconds)**](graphs/sim_seconds.jpg)
 
 ### **Task 1.c** 
 
