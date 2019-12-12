@@ -1,4 +1,4 @@
-# COMPUTER ARCHITECTURE
+# COMPUTER ARCHITECTURE gem5
 
 
 _Falis Konstantinos_  
