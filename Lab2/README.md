@@ -71,7 +71,7 @@ _Valasiadou Panagiota_
 ### **Task 1.b** 
 ### **stats.txt**  
 
-* **401.bzip2**  |  stats
+* **401.bzip2**  |  |
     ---|---  
 	 sim_seconds  |                               0.086956   
 	 system.cpu.cpi                |               1.739123    
@@ -79,15 +79,15 @@ _Valasiadou Panagiota_
     system.cpu.dcache.overall_miss_rate::total |  0.014599   
     system.l2.overall_miss_rate::total    |       0.266697  
 
-* **456.hmmer** | stats
+* **456.hmmer** | |
     ---|---
-	sim_seconds                 |                 0.059431   
-	system.cpu.cpi               |                1.188625   
-	system.cpu.icache.overall_miss_rate::total  | 0.000128  
-    system.cpu.dcache.overall_miss_rate::total |  0.001625   
-    system.l2.overall_miss_rate::total          | 0.083085   
+	|sim_seconds                 |                 0.059431   
+	|system.cpu.cpi               |                1.188625   
+	|system.cpu.icache.overall_miss_rate::total  | 0.000128  
+    |system.cpu.dcache.overall_miss_rate::total |  0.001625   
+    |system.l2.overall_miss_rate::total          | 0.083085   
 
- * **470.lbm**  |stats  
+ * **470.lbm**  | |
     ---|---
 	sim_seconds    |                              0.174681   
 	system.cpu.cpi       |                        3.493624  
@@ -97,19 +97,19 @@ _Valasiadou Panagiota_
    
 * **429.mcf**   |stats
     ---|---
-	sim_seconds                  |                0.056131  
-	system.cpu.cpi                             |  1.122612   
-	system.cpu.icache.overall_miss_rate::total |  0.000039  
-	system.cpu.dcache.overall_miss_rate::total |  0.002168  
-    system.l2.overall_miss_rate::total         |  0.701421   
+	|sim_seconds                  |                0.056131  
+	|system.cpu.cpi                             |  1.122612   
+	|system.cpu.icache.overall_miss_rate::total |  0.000039  
+	|system.cpu.dcache.overall_miss_rate::total |  0.002168  
+    |system.l2.overall_miss_rate::total         |  0.701421   
    
-* **458.sjeng**   |stats
+* **458.sjeng**   ||
     ---|---
-	sim_seconds                             |     0.513520   
-	system.cpu.cpi                             |  10.270404   
-	system.cpu.icache.overall_miss_rate::total  | 0.000015  
-    system.cpu.dcache.overall_miss_rate::total |  0.121831  
-    system.l2.overall_miss_rate::total          | 0.999945     
+	|sim_seconds                             |     0.513520   
+	|system.cpu.cpi                             |  10.270404   
+	|system.cpu.icache.overall_miss_rate::total  | 0.000015  
+    |system.cpu.dcache.overall_miss_rate::total |  0.121831  
+    |system.l2.overall_miss_rate::total          | 0.999945     
       
 ### **GRAPHS:**  
 
@@ -132,6 +132,8 @@ _Valasiadou Panagiota_
 ### **5.L2 Cache Miss Rate**
 
 ![](./graphs/L2miss.jpg)
+
+    We can observe that the execution time and CPI for each benchmark are strongly related. Also, the miss rate of L1D cache seems to have the biggest correlation with the execution time and CPI, compared to the other miss rates.
 
 ### **Task 1.c** 
 
@@ -172,22 +174,19 @@ _All cores(cpu0,cpu1) have the same clock as it is expected._
 
 ### **Scaling**  
 
-				                1GHz			       2GHz		          4GHz
-    401.bzip2  sim_seconds    0.166561             0.086956 	    	0.047382
-
-	456.hmmer  sim_seconds    0.118453              0.059431			0.029822
-
-    470.lbm    sim_seconds   0.262355               0.174681			0.132673
-
-    429.mcf    sim_seconds    0.109967              0.056131			 0.028977
-	
-    458.sjeng  sim_seconds    0.704097              0.513520        	0.417614 
+benchmark|cpu clock:|1GHz|2GHz|4GHz
+---|---|---|---|---
+|401.bzip2:|  |   0.166561   |          0.086956 	 |   	0.047382
+456.hmmer:|   |  0.118453  |            0.059431		|	0.029822
+470.lbm:  |   |  0.262355       |        0.174681		|	0.132673
+429.mcf:  |    |  0.109967        |      0.056131		|	 0.028977
+458.sjeng:  | | 0.704097       |       0.513520    |    	0.417614 
 			
 	
 Scaling is almost perfect for bzip2, mcf,hmmer but not for sjeng,lbm.
 The reason is that bzip2, mcf,hmmer,are benchmarks that measure compute-intensive integer performance while lbm is for compute-intensive floating point performance.
-Floating point data need more memory that can't fit in cache so the increase of the cpu-clock(the decrease of the sim seconds) is limited by the latency from memory acceses.
-Also for sjeng there isn't a perfect scaling and one reason is that it creates a tree of possible chess moves so it needs a lot of memory.Often accesses occuring in lower memory levels makes it difficult for the cpu clock to scale.
+Floating point data need more memory that can't fit in cache so the increase of the cpu-clock rate(the decrease of the sim_seconds/execution time) is limited by the latency from memory acceses.
+Also for sjeng there isn't a perfect scaling and one reason is that it creates a tree of possible chess moves so it needs a lot of memory.Often accesses occuring in lower memory levels makes it difficult for the cpu-clock rate to scale with sim_seconds/execution time.
 
 
 ### **Task 2.a**  
@@ -198,6 +197,8 @@ Results after running the benchmarks with different parameters:
 **L1D_miss_rate**=system.cpu.dcache.overall_miss_rate::total  
 **L1I_miss_rate**=system.cpu.icache.overall_miss_rate::total  
 **L2_miss_rate**=system.l2.overall_miss_rate::total
+
+The logic behind the choice of parameters for the benchmarks was firstly to keep constant the default numbers and only change a parameter at a time.Then, after finding the best choice for that parameter (smallest CPI) we tried to change the others parameters too ,to observe the impact.Some choices had a small impact on CPI compared with their cost.We consider as the best choice(with bold letters in the table) the one that leads to the best CPI(the cost effect is analysed in Task 3).
 
 * **401.bzip2** [(results)](./results/Results_bzip2.txt)
 
@@ -233,16 +234,18 @@ Benchmarks 	                  |                         CPI	 |    L1D_miss_rate 
 
 ### **2.CPI vs L1 size (bzip)**
 ![](./graphs/bzip2.jpg)
-
+  
 ### **3.CPI vs L2 size (bzip)**
 ![](./graphs/bzip3.jpg)
 
 ### **4.CPI vs Cache Line size (bzip)**
 ![](./graphs/bzip4.jpg)
 
+>**BZIP2** usually allocates several megabytes of memory to operate in, and then charges all over it in a fairly random fashion. This means that performance, both for compressing and decompressing is largely determined by the speed at which your machine can service cache misses. We observe that higher associativity, larger L1 cache and larger block size slightly reduce L1 miss rate and CPI. CPI does not depend on L2 size. The impact of block size is also reduced for higher associativity.
 
 
-* **456.hmmer** [(results)](./results/Results_hmmer.txt)
+* **456.hmmer**[(results)](./results/Results_hmmer.txt)
+
 
 Benchmarks |	                                           CPI	  |   L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate
 ---|---|---|---|---	
@@ -282,6 +285,8 @@ Benchmarks |	                                           CPI	  |   L1D_miss_rate 
 ### **5.CPI vs L1 size for CL-size=128 bytes (hmmer)**
 ![](./graphs/hmmer5.jpg)
 
+>**HMMER** This benchmark has a low CPI even with the deafult parameters. So, we cant say that using higher associativity ,large cache or block size has any notable impact on the CPI. However, we notice that for a block size of 128 bytes , CPI is optimum for most L1 sizes.
+
 * **470.lbm** [(results)](./results/Results_libm.txt)
 
 Benchmarks 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
@@ -315,6 +320,9 @@ Benchmarks 	  |                                         CPI	|     L1D_miss_rate 
 
 ### **4.CPI vs Cache Line size (lbm)**
 ![](./graphs/lbm4.jpg)
+
+>**LIBM** Associativity and L1 size have no impact on the CPI. About L2 size, increasing it from 1 MB to 2 MB has the most significant effect on the CPI.
+However, the most important factor for the CPI of lbm seems to be the Cache Line size. As we can see from graph 4 using 128 bytes is the best choice, and more than that is unnecessary.
 
 
 * **429.mcf** [(results)](./results/Results_mcf.txt)
@@ -350,6 +358,8 @@ Benchmarks 	  |                                         CPI	|     L1D_miss_rate 
 
 ### **4.CPI vs Cache Line size (mcf)**
 ![](./graphs/mcf4.jpg)
+
+>**MCF** The CPI of this benchmark is close to 1. To get ssuch low values, though, we need to use at least 64 KB of L1D and 32 KB of L1I. Furthermore, CPI is optimum for a block size of 128 bytes.
 
 * **458.sjeng** [(results)](./results/Results_sjeng.txt)  
 
@@ -394,3 +404,28 @@ Benchmarks 	  |                                         CPI	|     L1D_miss_rate 
 
 ### **5.CPI vs Cache size for CL-size=256 bytes (sjeng)**
 ![](./graphs/sjeng5.jpg)
+
+>**SJENG** This benchmark has a very high CPI with the deafult paremeters.
+Increasing associativity or L1,L2 cache sizes results in the same performance.
+The only relevant parameter for this benchmark is the Cache Line size, as we increase it , CPI is significantly reduced (Graph 4). So , with a block size of 256 bytes we can even use really small Caches (Graph 5). 
+
+### **Task 3**  
+
+#### Cost function:
+
+    F = CPI * COST
+
+    COST = (L1D+L1I)+ (1/10)*L2 + a1*L1-assoc +
+
+
+### **Conclusion**
+>This lab exercise introduced us to the concept of design exploration of a CPU system , using gem5.
+- **Task 1:** It was pretty straightforward, as it showed us the use of benchmarks and how the system performance depends not only on the system itself , but also to the program being run. 
+- **Task 2:** It required a lot of time and recurrent work in order to gather the data , while it was not always obvious how the CPI is affected each time.
+- **Task 3:** The qualitative approach of the cost function was quite clear , however it was hard to quantify the relationship between the parameters. 
+
+
+
+
+### **Bibliography/Useful Links:**
+
