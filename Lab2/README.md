@@ -1,5 +1,5 @@
 # COMPUTER ARCHITECTURE
-## LAB 2  Gem5
+## LAB 2  Design Space Exploration with gem5
 
 _Falis Konstantinos_  
 _Valasiadou Panagiota_
@@ -32,9 +32,10 @@ _Valasiadou Panagiota_
    >parser.add_option("--l2_assoc", type="int", default=8) [line:125]
  
 
- * **Cache Line Size:**  
+ * **Cache Line Size:**   
   **se.py**
-
+    
+    cache line size = 64
    >system = System(cpu = [CPUClass(cpu_id=i) for i in range(np)],   
                 mem_mode = test_mem_mode,  
                 mem_ranges = [AddrRange(options.mem_size)],  
@@ -95,7 +96,7 @@ _Valasiadou Panagiota_
     system.cpu.dcache.overall_miss_rate::total  | 0.060971   
     system.l2.overall_miss_rate::total         |  0.999946   
    
-* **429.mcf**   |stats
+* **429.mcf**   ||
     ---|---
 	|sim_seconds                  |                0.056131  
 	|system.cpu.cpi                             |  1.122612   
@@ -133,7 +134,7 @@ _Valasiadou Panagiota_
 
 ![](./graphs/L2miss.jpg)
 
-    We can observe that the execution time and CPI for each benchmark are strongly related. Also, the miss rate of L1D cache seems to have the biggest correlation with the execution time and CPI, compared to the other miss rates.
+ >We can observe that the execution time and CPI for each benchmark are strongly related. Also, the miss rate of L1D cache seems to have the biggest correlation with the execution time and CPI, compared to the other miss rates.
 
 ### **Task 1.c** 
 
@@ -202,7 +203,7 @@ The logic behind the choice of parameters for the benchmarks was firstly to keep
 
 * **401.bzip2** [(results)](./results/Results_bzip2.txt)
 
-Benchmarks 	                  |                         CPI	 |    L1D_miss_rate  |  L1I_miss_rate  | L2_miss_rate
+Models	                  |                         CPI	 |    L1D_miss_rate  |  L1I_miss_rate  | L2_miss_rate
 ---|---|---|---|---
 1.specbzip_L1D(16,4)_L1I(8,4)_L2(4,16)_CL(64)  |       1.646686	|    0.020357	 |   0.000194 |       0.178179
 2.specbzip_L1D(16,4)_L1I(8,4)_L2(512,8)_CL(64)	|    1.706717	|    0.020353	 |   0.000195	|    0.275318
@@ -247,7 +248,7 @@ Benchmarks 	                  |                         CPI	 |    L1D_miss_rate 
 * **456.hmmer**[(results)](./results/Results_hmmer.txt)
 
 
-Benchmarks |	                                           CPI	  |   L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate
+Models |	                                           CPI	  |   L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate
 ---|---|---|---|---	
 1.spechmmer_L1D(32,2)_L1I(16,2)_L2(2,8)_CL(64)	    |1.189222	 |   0.002368	  |  0.000781	  |  0.051941
 2.spechmmer_L1D(64,1)_L1I(32,1)_L2(2,4)_CL(64)	    |1.209620	  |  0.003468	 |   0.000624    |	0.037902
@@ -289,7 +290,7 @@ Benchmarks |	                                           CPI	  |   L1D_miss_rate 
 
 * **470.lbm** [(results)](./results/Results_libm.txt)
 
-Benchmarks 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
+Models 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
 ---|---|---|---|---
 1.speclibm_L1D(32,2)_L1I(16,2)_L2(2,8)_CL(64)	    |    2.623140	|0.060971	|0.000108	|0.999892
 2.speclibm_L1D(64,1)_L1I(32,1)_L2(2,4)_CL(64)	     |   2.638071|	0.061561	|0.000113	|0.986435
@@ -327,7 +328,7 @@ However, the most important factor for the CPI of lbm seems to be the Cache Line
 
 * **429.mcf** [(results)](./results/Results_mcf.txt)
   
-Benchmarks 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
+Models 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
 ---|---|---|---|---
 1.specmcf_L1D(32,2)_L1I(16,2)_L2(2,8)_CL(64)	|1.469198	|0.002390	|0.059433	|0.023445
 2.specmcf_L1D(64,1)_L1I(32,1)_L2(2,4)_CL(64)	|1.118466	|0.002560	|0.004668	|0.202505
@@ -359,11 +360,11 @@ Benchmarks 	  |                                         CPI	|     L1D_miss_rate 
 ### **4.CPI vs Cache Line size (mcf)**
 ![](./graphs/mcf4.jpg)
 
->**MCF** The CPI of this benchmark is close to 1. To get ssuch low values, though, we need to use at least 64 KB of L1D and 32 KB of L1I. Furthermore, CPI is optimum for a block size of 128 bytes.
+>**MCF** The CPI of this benchmark is close to 1. To get such low values, though, we need to use at least 64 KB of L1D and 32 KB of L1I. Furthermore, CPI is optimum for a block size of 128 bytes.
 
 * **458.sjeng** [(results)](./results/Results_sjeng.txt)  
 
-Benchmarks 	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
+Models	  |                                         CPI	|     L1D_miss_rate  |  L1I_miss_rate |  L2_miss_rate	
 ---|---|---|---|---
 1.specsjeng_L1D(16,2)_L1I(8,2)_L2(256,8)_CL(128)	|4.976038|	0.060920|	0.000020|	0.999795
 2.specsjeng_L1D(16,2)_L1I(8,2)_L2(256,8)_CL(256)	|3.715863|	0.030468|	0.000019|	0.999311
@@ -411,14 +412,147 @@ The only relevant parameter for this benchmark is the Cache Line size, as we inc
 
 ### **Task 3**  
 
+In Task 3 we have been asked to define a evaluation function for the caches, taking into consideration the cost and the performance(CPI).   
+
+The evaluation function we came up with is **F=CPI*COST** and is easy to understand that **Fmin** indicates the best choice for the design of caches(small CPI and low cost or the best trade-off between them).
+
+The cost function(COST) should generally reflect the price of each design choices.  
+* Obviously, larger caches are more expensive, so size should be a key parameter of our cost function.   
+* Similarly,associativity increases the cost of the cache (by adding extra hardware).
+* The cache line size is another parameter that increases the hardware and complexity as it gets larger so the cost is affected.
+* Another fact is that L2 caches are cheaper than L1 caches because they are much slower ( L2 cache latency = 14x L1 cache latency) [see][latency L1/L2].We consider the ratio of L1 to L2 cost to be approximately 1 to 10 (1:10).
+  
+Taking into consideration the complexity of the above techniques and after some research we conclude that we need to add some constant numbers in the cost function as coefficients.The goal is to clearly define the complexity and the cost of each choise.
+
+Technique | Complexity |Coefficient
+---|---|---
+Larger Block Size |  0 | 1
+Higher Associativity | 1 | 2
+Larger caches      |  2 | 3
+
+At this point the cost function should be :   
+
+        3[(L1Ds+L1Is)+(L2s/10)] +2(L1Da+L1Ia+L2a) +1(cls)
+        3(part 1) + 2(part 2) + 1(part 3)
+>L1Ds=L1 data cache size (kB)   
+L1Is=L1 instruction cache size (kB)  
+L2s=L2 cache size (kB) 
+L1Da=L1 data cache associativity  
+L1Ia=L1 instruction cache associativity  
+L2a=L2 cache associativity   
+cls=cache line size (bytes)
+
+Another problem that we need to solve is that we try to add some numbers that have different measures and large variance(part 1(max):656 , part 2(max):32 , part 3(max):256). So we need to add some extra coefficients that will approximately balance the three parts.This way all the three techniques will have important impact to the cost and the complexity coefficients will deliver on their main goal. After some tests and taking into consideration the maximum values of the parameters (256kB for L1, 4MB for L2, (8,8,16) for associativity(more than 16 is ralely used), 256 bytes for block size(more than that is ralely used)) we come up with a suitable number(16) that will divide part 1 and part 3.  
+
 #### Cost function:
 
     F = CPI * COST
 
-    COST = (L1D+L1I)+ (1/10)*L2 + a1*L1-assoc +
+    COST = {3[(L1Ds+L1Is)+(L2s/10)]/16} +2(L1Da+L1Ia+L2a) +1(cls/16)
+
+#### Finding the most _Value for money_ model for each benchmark
+In order to find which model maximizes the performance while keeping the cost low, we run a MATLAB script for each benchmark that computes the **Cost** and the value of the **F** function shown above. Therefore, by finding the **minimum** value of F we have also found the optimum **cache paremeters** for that benchmark. 
+
+>The red bar of the graphs below shows the corresponding minimum value.
+#### Bzip:
+
+[Models](./matlab_scripts/Results_bzip2.txt)
+
+![](./graphs/CPI_bzip.jpg)
+
+![](./graphs/cost_bzip.jpg)
+
+![](./graphs/f_bzip.jpg)
+
+ CPI is similar for every model in this benchmark, so the Cost of the model will be the deciding factor. So, **model 2** will be our best choice and model 19 the second best.
+
+Model|L1D-size|L1D-assoc|L1I-size|L1I-assoc|L2-size|L2-assoc|CLS|CPI|Cost|F	
+---|---|---|---|---|---|---|---|---|---|---
+2|16	|4	|8	|4	|0.5|8	|64 |1.706717|50.1|85.506
+19|64	|2	|32	|2	|1	|8	|64 |1.630251|65.2|106.292
+
+For all cost and F values: [Here](./cost_values/cost_F_bzip.txt)
+
+#### Hmmer:
+
+[Models](./matlab_scripts/Results_hmmer.txt)
+
+![](./graphs/CPI_hmmer.jpg)
+
+![](./graphs/cost_hmmer.jpg)
+
+![](./graphs/f_hmmer.jpg)
+ 
+CPI is similar for every model in this benchmark, so the Cost of the model will be the deciding factor,again. So, **model 15** will be our best choice.
+
+Model|L1D-size|L1D-assoc|L1I-size|L1I-assoc|L2-size|L2-assoc|CLS|CPI|Cost|F	
+---|---|---|---|---|---|---|---|---|---|---
+15|64|2|32|2|1|8|64|1.187362|65.2|	77.416
 
 
-### **Conclusion**
+For all cost and F values: [Here](./cost_values/cost_F_hmmer.txt)
+
+#### Libm:
+
+[Models](./matlab_scripts/Results_libm.txt)
+
+![](./graphs/CPI_libm.jpg)
+
+![](./graphs/cost_libm.jpg)
+
+![](./graphs/f_libm.jpg)
+
+Here, CPI varies considerably.Hence, both the Cost and CPI of the model are important. So, **model 5** will be the optimum choice, since it combines a fairly low cost and a low CPI.
+
+Model|L1D-size|L1D-assoc|L1I-size|L1I-assoc|L2-size|L2-assoc|CLS|CPI|Cost|F	
+---|---|---|---|---|---|---|---|---|---|---
+5|64|2	|32|2	|2	|8|	128	|1.990434|88.4|175.954
+
+
+For all cost and F values: [Here](./cost_values/cost_F_libm.txt)
+
+#### Mcf:
+
+[Models](./matlab_scripts/Results_mcf.txt)
+
+![](./graphs/CPI_mcf.jpg)
+
+![](./graphs/cost_mcf.jpg)
+
+![](./graphs/f_mcf.jpg)
+
+Generally, CPI is similar and has a low value for every model in this benchmark. So the Cost of the model will be the deciding factor,again.  **Model 15** will be our best choice, then, having the minimum cost and F-value.
+
+Model|L1D-size|L1D-assoc|L1I-size|L1I-assoc|L2-size|L2-assoc|CLS|CPI|Cost|F	
+---|---|---|---|---|---|---|---|---|---|---
+15|64|	2	|32|	2|	1	|8|	64	|1.093448|65.2|	71.293
+
+
+For all cost and F values: [Here](./cost_values/cost_F_mcf.txt)
+
+
+#### Sjeng:
+
+[Models](./matlab_scripts/Results_sjeng.txt)
+
+
+![](./graphs/CPI_sjeng.jpg)
+
+![](./graphs/cost_sjeng.jpg)
+
+![](./graphs/f_sjeng.jpg)
+
+Similarly to libm, CPI varies considerably.Therefore, the minimum F value will be a combination of a low cost and a low CPI. So, **model 2** will be the best choice, with model 4 a close second.
+
+Model|L1D-size|L1D-assoc|L1I-size|L1I-assoc|L2-size|L2-assoc|CLS|CPI|Cost|F	
+---|---|---|---|---|---|---|---|---|---|---
+2|16|	2|	8	|2	|0.25|	8	|256|	3.715863|49.3|	183.192
+4|16|	2	|8	|2	|0.5	|8	|256	|3.715484|54.1|201.008
+
+
+For all cost and F values: [Here](./cost_values/cost_F_sjeng.txt)
+
+### **Conclusion/Review**
 >This lab exercise introduced us to the concept of design exploration of a CPU system , using gem5.
 - **Task 1:** It was pretty straightforward, as it showed us the use of benchmarks and how the system performance depends not only on the system itself , but also to the program being run. 
 - **Task 2:** It required a lot of time and recurrent work in order to gather the data , while it was not always obvious how the CPI is affected each time.
@@ -428,4 +562,21 @@ The only relevant parameter for this benchmark is the Cache Line size, as we inc
 
 
 ### **Bibliography/Useful Links:**
+ 
+* http://www.brunel.ac.uk/~eestppk/EE5531/10CacheOptimisation.pdf
+
+* https://www.researchgate.net/publication/262419272_C_2013_IJARCSSE_All_Rights_Reserved_Survey_on_Hardware_Based_Advanced_Technique_for_Cache_Optimization_for_RISC_Based_System_Architecture
+
+* https://courses.cs.washington.edu/courses/cse378/09au/lectures/cse378au09-20.pdf
+
+* http://ece-research.unm.edu/jimp/611/slides/chap5_2.html
+
+* http://courses.cs.vt.edu/cs2506/Fall2014/Notes/L16.CachePoliciesAndPerformance.pdf
+
+* https://www.bu.edu/peaclab/files/2014/03/zamancoskun_PATMOS18.pdf
+
+* https://www.cse.huji.ac.il/~comarc/slides/lect7-1.pdf
+* https://www.spec.org/cpu2006/Docs/readme1st.html
+
+[latency L1/L2]:https://gist.github.com/jboner/2841832?fbclid=IwAR2B0uZoHr7uMDLD_X8XLuTUpkUw83bwaRTE7Ch5HQCkUo5jQgVgesCcUvk
 
