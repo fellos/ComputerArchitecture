@@ -12,5 +12,5 @@ _Valasiadou Panagiota_
 
 > **Lab 2: Design Space Exploration with gem5**
 
->**Lab 3:**
+>**Lab 3: Energy-Delay-Area Product Optimization (gem5+ McPAT)**
 

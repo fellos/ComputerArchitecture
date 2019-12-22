@@ -1,0 +1,4 @@
+Reading simulation time from: /home/pvala/my_mcpat/mcpat/results/sjeng2.txt
+Reading simulation time from: /home/pvala/git_clone/ComputerArchitecture/Lab3/spec_results/specsjeng2/stats.txt
+leakage: 2.473470 W, dynamic: 0.965978 W and runtime: 0.371586 sec
+energy is 1278.050725 mJ

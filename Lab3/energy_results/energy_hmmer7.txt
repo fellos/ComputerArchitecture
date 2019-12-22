@@ -1,0 +1,4 @@
+Reading simulation time from: /home/konstantinos/my_mcpat/mcpat/results/hmmer7.txt
+Reading simulation time from: /home/konstantinos/Git/ComputerArchitecture/Lab3/spec_results/spechmmer7/stats.txt
+leakage: 0.957672 W, dynamic: 0.398832 W and runtime: 0.118408 sec
+energy is 160.620926 mJ

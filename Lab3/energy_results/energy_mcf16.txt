@@ -1,0 +1,4 @@
+Reading simulation time from: /home/pvala/my_mcpat/mcpat/results/mcf16.txt
+Reading simulation time from: /home/pvala/git_clone/ComputerArchitecture/Lab3/spec_results/specmcf16/stats.txt
+leakage: 2.487210 W, dynamic: 1.127410 W and runtime: 0.111875 sec
+energy is 404.385613 mJ

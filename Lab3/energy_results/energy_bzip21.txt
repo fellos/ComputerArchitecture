@@ -1,0 +1,4 @@
+Reading simulation time from: /home/konstantinos/my_mcpat/mcpat/results/bzip21.txt
+Reading simulation time from: /home/konstantinos/Git/ComputerArchitecture/Lab3/spec_results/specbzip21/stats.txt
+leakage: 3.030600 W, dynamic: 2.120160 W and runtime: 0.159206 sec
+energy is 820.031897 mJ

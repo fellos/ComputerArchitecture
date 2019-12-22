@@ -1,0 +1,4 @@
+Reading simulation time from: /home/konstantinos/my_mcpat/mcpat/results/libm7.txt
+Reading simulation time from: /home/konstantinos/Git/ComputerArchitecture/Lab3/spec_results/speclibm7/stats.txt
+leakage: 0.957672 W, dynamic: 0.270658 W and runtime: 0.262315 sec
+energy is 322.209384 mJ
