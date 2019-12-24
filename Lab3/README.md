@@ -59,16 +59,16 @@ energy_eff= 1/3.069217 = 0.325816
 
 We can observe that Xeon seems to be more energy efficient than ARM A9. However, we have to take into consideration that the total leakage power in Xeon is big enough. That means that even when the system is idle, there is power consumed due to leakage. The conclusion is that in the long term , the ARM A9 processor is the most energy efficient one(between ARM A9 and Xeon).     
 
-### **Task 2**
-The main goal here is to calculate the EDAP (Energy Delay Area product) for every CPU model that we created in the previous lab exercise **(see ./spec_results)**.
+### **Task 2.a**
+The main goal here is to calculate the **EDAP (Energy Delay Area product)** for every CPU model that we created in the previous lab exercise **(see ./spec_results)**.
 To achieve that, we created the xml file **(see ./cpus)** for every CPU model and then used them to get the McPAT results for each one **(see ./mcpat_results)**.
 
 **EDAP**
 
-* Energy : We used the energy value from the outpur results of the print_energy.py scripts **(see ./energy_results)**.
-* Delay : We used the execution time of each program , that is the sim_seconds value from the gem5 stats.txt .
-* Area: We used the sum of Core:Area and L2:Area of the McPat results.
-* **EDAP = Energy(mJ) * Delay(sec) * Area(mm^2)**
+* **Energy :** Energy is defined as **runtime power * time**. To get faster results we used the energy value from the output results of the print_energy.py scripts, which computes the energy as mentioned above. **(see ./energy_results)**.
+* **Delay :** We used the execution time of each program , that is the sim_seconds value from the gem5 stats.txt . Sim_seconds can also be found in the output of the srcipts print_energy.py as runtime.
+* **Area**: We used the sum of Core:Area and L2:Area of the McPat results.
+> **EDAP = Energy(mJ) * Delay(sec) * Area(mm^2)**
 
 - ### **bzip:**
 
@@ -95,7 +95,10 @@ Models |
 19.specbzip_L1D(64,2)_L1I(32,2)_L2(1,8)_CL(64)   | 
 20.specbzip_L1D(64,2)_L1I(32,2)_L2(2,8)_CL(256)	   | 
 21.specbzip_L1D(64,4)_L1I(32,4)_L2(2,16)_CL(256)	|    
-22.specbzip_L1D(64,4)_L1I(32,4)_L2(4,16)_CL(256)	|    
+22.specbzip_L1D(64,4)_L1I(32,4)_L2(4,16)_CL(256)	| 
+
+![](./graphs/bzip_edap1.jpg)
+
 **For the EDAP results click [here](./edap/edap_bzip.txt).**
 
 - ### **hmmer:**
@@ -123,7 +126,10 @@ Models |
 
 >Note: Models 17 and 18 were the same by mistake so we overlooked model 18.
 
+![](./graphs/hmmer_edap1.jpg)
+
 **For the EDAP results click [here](./edap/edap_hmmer.txt).**
+
 - ### **libm:**
 Models 	  |             	
 ---|
@@ -143,6 +149,8 @@ Models 	  |
 14.speclibm_L1D(128,4)_L1I(64,4)_L2(4,8)_CL(128)	 |      
 15.speclibm_L1D(64,2)_L1I(32,2)_L2(1,8)_CL(64)	    |    
 16.speclibm_L1D(64,2)_L1I(32,2)_L2(2,8)_CL(256)	     |  
+
+![](./graphs/libm_edap1.jpg)
 
 **For the EDAP results click [here](./edap/edap_libm.txt).**
 
@@ -165,6 +173,8 @@ Models 	  |
 14.specmcf_L1D(128,8)_L1I(64,8)_L2(2,8)_CL(64)|	
 15.specmcf_L1D(64,2)_L1I(32,2)_L2(1,8)_CL(64)	|
 16.specmcf_L1D(64,2)_L1I(32,2)_L2(2,8)_CL(256)	|
+
+![](./graphs/mcf_edap1.jpg)
 
 **For the EDAP results click [here](./edap/edap_mcf.txt).**
 
@@ -194,7 +204,239 @@ Models 	  |
 21.specsjeng_L1D(64,2)_L1I(32,2)_L2(1,8)_CL(64)	|
 22.specsjeng_L1D(64,2)_L1I(32,2)_L2(2,8)_CL(256)|	
 
+![](./graphs/sjeng_edap1.jpg)
+
 **For the EDAP results click [here](./edap/edap_sjeng.txt).**
+ 
+
+### **Task 2.b**
+
+
+ ### **GRAPHS**
+
+Through the following graphs we show the effect that the parameters such as **cache size**, **associativity** and **block size** have on the **area** and **power** of the system. As area we use the sum of core area and L2 area. As power we use the peak power as the following sum:  
+>**peak_power** = peakDynCore + subLeakageCore + gateLeakageCore + peakDynL2 + subLeakageL2 + gateLeakageL2
+
+* **peakDynCore** : in McPAT output as **Peak Dynamic of the core**  
+* **subLeakageCore** : in McPAT output as **Subthreshold Leakage of the core**   
+* **gateLeakageCore** : in McPAT output as **Gate Leakage of the core**  
+* **peakDynL2** : in McPAT output as **Peak Dynamic of the L2**   
+* **subLeakageL2** : in McPAT output as **Subthreshold Leakage of the L2**  
+* **gateLeakageL2** : in McPAT output as **Gate Leakage of the L2**  
+  
+
+
+### **BZIP (Area)** 
+
+
+### **1.Area vs Associativity (bzip)**
+
+![](./graphs/bzip_area1.jpg)
+
+### **2.Area vs L1 size (bzip)**
+
+![](./graphs/bzip_area2.jpg)
+
+### **3.Area vs L2 size (bzip)**
+
+![](./graphs/bzip_area3.jpg)
+
+### **4.Area vs Cache Line size (bzip)**
+
+![](./graphs/bzip_area4.jpg)
+
+
+### **BZIP (Power)** 
+
+
+### **1.Power vs Associativity (bzip)**
+
+![](./graphs/bzip_power1.jpg)
+
+### **2.Power vs L1 size (bzip)**
+
+![](./graphs/bzip_power2.jpg)
+
+### **3.Power vs L2 size (bzip)**
+
+![](./graphs/bzip_power3.jpg)
+
+### **4.Power vs Cache Line size (bzip)**
+
+![](./graphs/bzip_power4.jpg)
+
+
+
+### **HMMER (Area)** 
+
+
+### **1.Area vs Associativity (hmmer)**
+
+![](./graphs/hmmer_area1.jpg)
+
+### **2.Area vs L1 size (hmmer)**
+
+![](./graphs/hmmer_area2.jpg)
+
+### **3.Area vs L2 size (hmmer)**
+
+![](./graphs/hmmer_area3.jpg)
+
+### **4.Area vs Cache Line size (hmmer)**
+
+![](./graphs/hmmer_area4.jpg)
+
+
+### **HMMER (Power)** 
+
+
+### **1.Power vs Associativity (hmmer)**
+
+![](./graphs/hmmer_power1.jpg)
+
+### **2.Power vs L1 size (hmmer)**
+
+![](./graphs/hmmer_power2.jpg)
+
+### **3.Power vs L2 size (hmmer)**
+
+![](./graphs/hmmer_power3.jpg)
+
+### **4.Power vs Cache Line size (hmmer)**
+
+![](./graphs/hmmer_power4.jpg)
+
+
+
+### **LIBM (Area)** 
+
+
+### **1.Area vs Associativity (libm)**
+
+![](./graphs/libm_area1.jpg)
+
+### **2.Area vs L1 size (libm)**
+
+![](./graphs/libm_area2.jpg)
+
+### **3.Area vs L2 size (libm)**
+
+![](./graphs/libm_area3.jpg)
+
+### **4.Area vs Cache Line size (libm)**
+
+![](./graphs/libm_area4.jpg)
+
+
+### **LIBM (Power)** 
+
+
+### **1.Power vs Associativity (libm)**
+
+![](./graphs/libm_power1.jpg)
+
+### **2.Power vs L1 size (libm)**
+
+![](./graphs/libm_power2.jpg)
+
+### **3.Power vs L2 size (libm)**
+
+![](./graphs/libm_power3.jpg)
+
+### **4.Power vs Cache Line size (libm)**
+
+![](./graphs/libm_power4.jpg)
+
+
+
+### **MCF (Area)** 
+
+
+### **1.Area vs Associativity (mcf)**
+
+![](./graphs/mcf_area1.jpg)
+
+### **2.Area vs L1 size (mcf)**
+
+![](./graphs/mcf_area2.jpg)
+
+### **3.Area vs L2 size (mcf)**
+
+![](./graphs/mcf_area3.jpg)
+
+### **4.Area vs Cache Line size (mcf)**
+
+![](./graphs/mcf_area4.jpg)
+
+
+### **MCF (Power)** 
+
+
+### **1.Power vs Associativity (mcf)**
+
+![](./graphs/mcf_power1.jpg)
+
+### **2.Power vs L1 size (mcf)**
+
+![](./graphs/mcf_power2.jpg)
+
+### **3.Power vs L2 size (mcf)**
+
+![](./graphs/mcf_power3.jpg)
+
+### **4.Power vs Cache Line size (mcf)**
+
+![](./graphs/mcf_power4.jpg)
+
+
+
+### **SJENG (Area)** 
+
+
+### **1.Area vs Associativity (sjeng)**
+
+![](./graphs/sjeng_area1.jpg)
+
+### **2.Area vs L1 size (sjeng)**
+
+![](./graphs/sjeng_area2.jpg)
+
+### **3.Area vs L2 size (sjeng)**
+
+![](./graphs/sjeng_area3.jpg)
+
+### **4.Area vs Cache Line size (sjeng)**
+
+![](./graphs/sjeng_area4.jpg)
+
+
+### **SJENG (Power)** 
+
+
+### **1.Power vs Associativity (sjeng)**
+
+![](./graphs/sjeng_power1.jpg)
+
+### **2.Power vs L1 size (sjeng)**
+
+![](./graphs/sjeng_power2.jpg)
+
+### **3.Power vs L2 size (sjeng)**
+
+![](./graphs/sjeng_power3.jpg)
+
+### **4.Power vs Cache Line size (sjeng)**
+
+![](./graphs/sjeng_power4.jpg)
+
+
+
+#### **OBSERVATIONS :**  
+
+If we carefully observe all of the above graphs , we could extract some results that apply to every benchmark. This means that all the benchmarks according to the graphs seem to follow the same behavior for the area and the power of the system .
+So , when we increase the associativity of the caches there is no impact on the area and power of the system. Increasing L1 size leads on a small rise of area and power(almost linear).Same way, area of the system is affected by the increase of L2 size almost linearly. However, the increse of L2 size has no impact on the power. In the end, **the most noticeable effect in area and power of he system is the one that the change of the cache line size causes**(exponential function approximately).  
+
+
 
 ### **Task 2.c**
 Here, we will compare the EDAP results from every model with values of the cost function that we defined in the 2nd Lab. The comparison is accomplished with the respective bargraphs, and a scatterplot of the F function vs EDAP for each benchmark.
@@ -243,12 +485,17 @@ The scatterplot shows the correlation (r) between the two units , which were sta
 Although we expected to see some relation between the two measures since they both include a performance unit (CPI and Delay),
 our calculations showed that there is **no clear dependency** between the cost function 
 **F = cost * CPI** and the **EDAP = Energy * Delay * Area**, 
- meaning that the cost of a CPU does not depend on the area it covers or the energy it consumes,
+ meaning that the cost of a CPU does not depend on the area it covers or the energy it consumes. The most profound explanation of the small correlation ,is that while the **cache line size** has an important effect on area and power, and therefore on EDAP, it has an **insignificant impact on the cost**.
+ 
+  (based on our cost function: COST = {3[(L1Ds+L1Is)+(L2s/10)]/16} +2(L1Da+L1Ia+L2a) +**1(cls/16)**)
 
 ### **Conclusion/Review**
 >This lab exercise introduced us to the concepts of CPU power, Energy efficiency and EDAP optimization , with the help of McPAT.
 - **Task 1:** It was easy to find information about the power consumed in a CPU and it only required some effort to understand how is energy efficiency defined. 
 - **Task 2:** Gathering and presenting the results of mcpat took quite some time and repetitive work, while all benchmarks lead to the same conclusions. It would be preferable to use only one or two of them for this lab.
 ### **Bibliography/Useful Links:**
- 
+* https://en.wikipedia.org/wiki/CPU_power_dissipation
+* https://github.com/HewlettPackard/mcpat
+* https://www.hpl.hp.com/research/mcpat/micro09.pdf
+
 
